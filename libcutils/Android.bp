@@ -107,6 +107,7 @@ cc_library {
                 "partition_utils.cpp",
                 "properties.cpp",
                 "qtaguid.cpp",
+                "sysfs_cpu.cpp",
                 "trace-dev.cpp",
                 "uevent.cpp",
             ],

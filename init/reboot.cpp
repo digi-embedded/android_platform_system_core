@@ -45,6 +45,7 @@
 #include <android-base/unique_fd.h>
 #include <bootloader_message/bootloader_message.h>
 #include <cutils/android_reboot.h>
+#include <cutils/sysfs_cpu.h>
 #include <fs_mgr.h>
 #include <logwrap/logwrap.h>
 #include <private/android_filesystem_config.h>
@@ -187,6 +188,9 @@ void __attribute__((noreturn)) RebootSystem(unsigned int cmd, const std::string&
         // device, just exit cleanly.
         exit(0);
     }
+
+    /* Disable cores for poweroff/reboot */
+    sysfs_disable_cpu_all();
 
     switch (cmd) {
         case ANDROID_RB_POWEROFF:
