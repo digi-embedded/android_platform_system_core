@@ -705,6 +705,13 @@ void Service::StopOrReset(int how) {
     }
 
     if (pid_) {
+        if (name_.length() > 0) {
+            if (name_.compare("vendor.telit.ppp") == 0) {
+                kill(-pid_, SIGTERM);
+                NotifyStateChange("stopping");
+                return;
+            }
+        }
         KillProcessGroup(SIGKILL);
         NotifyStateChange("stopping");
     } else {
